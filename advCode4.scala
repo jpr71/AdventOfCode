@@ -1,5 +1,6 @@
 import scala.io.Source
 import java.security.MessageDigest
+import scala.util.control.Breaks._
 
 // Santa needs help mining some AdventCoins (very similar to bitcoins) to use 
 // as gifts for all the economically forward-thinking little girls and boys.
@@ -20,7 +21,7 @@ for( i <- 1 to 100000000) {
 	newString = secretKey + i.toString
 	val result = digest.digest(newString.getBytes).map("%02x".format(_)).mkString
 	result.substring(0,5) == "00000" match {
-		case true => println(i) 
+		case true => {println(i);break}
 		case false => None 
 	}
 	 
